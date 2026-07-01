@@ -17,5 +17,5 @@ A hands-on SOAR portfolio project demonstrating log-based threat detection, auto
 - [x] Lab network built and validated
 - [x] SSH brute-force simulated via hydra, confirmed in journald
 - [x] Sensor script written
-- [ ] n8n workflow
-- [ ] End-to-end test
+- [x] n8n workflow
+- [x] End-to-end test
