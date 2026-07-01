@@ -19,3 +19,17 @@ A hands-on SOAR portfolio project demonstrating log-based threat detection, auto
 - [x] Sensor script written
 - [x] n8n workflow
 - [x] End-to-end test
+## Architecture
+
+```mermaid
+flowchart LR
+    A[Kali Linux\n192.168.56.20] -->|hydra SSH\nbrute-force| B[Ubuntu Server\n192.168.56.10]
+    B -->|journald\nlog stream| C[sensor.py\n5 fails/10s]
+    C -->|webhook\nPOST JSON| D[n8n SOAR\n192.168.56.1:5678]
+    D -->|IP lookup| E[AbuseIPDB\nconfidence score]
+    E --> F{IF node\nscore threshold}
+    F -->|true| G[iptables DROP\nattacker IP]
+    F -->|false| H[No action]
+    G --> I[Security Alert\nwebhook/Slack]
+    G -.->|SSH cmd| B
+```
